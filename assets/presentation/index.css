@@ -72,7 +72,7 @@
 
     /* interface */
 
-    --interface: url(../../assets/interface/interface.svg);
+    --interface: url(/emotions-analysis/assets/interface/interface.svg);
     
 }
 
