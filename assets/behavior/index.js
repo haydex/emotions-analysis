@@ -46,8 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         initialize() {
 
-            this.setupD3JS();
-            this.setupD3JS2();
             this.setupD3JS3();
 
             for (let i = 0; i < this.filters.length; i++) {
