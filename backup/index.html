@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="assets/presentation/index.css">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script>
+        var d3v4 = window.d3;
+        window.d3 = null;
+    </script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script>
+        var d3v5 = window.d3;
+        window.d3 = null;
+    </script>
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <script src="assets/behavior/index.js"></script>
+    </head>
+<body>
+
+<section id="filters">
+    <div id="diagramSelectorWrapper">
+        <p id="diagramSelectorLabel">Chart type:</p>
+        <select id="diagramSelector">
+            <option value="bubbleChart">Bubble Chart</option>
+            <option value="lineChart">Line Chart</option>
+        </select>
+    </div>
+    <p id="filtersLabel">Emotions:</p>
+    <ul>
+        <li id="anger" class="active">Anger</li>
+        <li id="fear" class="active">Fear</li>
+        <li id="anticipation" class="active">Anticipation</li>
+        <li id="surprise" class="active">Surprise</li>
+        <li id="joy" class="active">Joy</li>
+        <li id="sadness" class="active">Sadness</li>
+        <li id="trust" class="active">Trust</li>
+        <li id="disgust" class="active">Disgust</li>
+    </ul>
+</section>
+
+
+<select id="selectbox">
+	<option value="_1">Fahrenheit</option>
+	<option value="_2">Celsius</option>
+</select>
+
+<svg id="chart" width="2000" height="410"></svg>
+
+<section id="moreInfoModal" class="">
+  <div id="shadow"></div>
+  <div id="messageBox">
+      <button id="closeButton"></button>
+      <div id="messageContent">
+          <img class="postImageModal" src="assets/images/35.jpg">
+          <div class="detailsWrapper">
+              <p id="title"><span id="text">Pentagon watchdog tapped to lead committee overseeing $2 trillion coronavirus package</span></p>
+              <ul id="details">
+                  <li id="Source">
+                      <div id="icon" class="detailsIcon"></div>
+                      <p id="label"></p>
+                      <a href="https://www.cdc.gov/">
+                          <p id="value">New York Times</p>
+                      </a>
+                  </li>
+                  <li id="published">
+                      <div id="icon" class="detailsIcon"></div>
+                      <p id="label"></p>
+                      <p id="value">April 03 2020 · 05:00 PM</p>
+                  </li>
+              </ul>
+              <p id="emotion">
+                  <span>Anticipation</span>
+              </p>
+          </div>
+      </div>
+  </div>
+</section>
+
+</body>
+</html>
