@@ -321,13 +321,13 @@ section#filters ul li#disgust.active {
 /*  APEXCHARTS */
 
 #chart {
-    margin: 35px auto;
+    margin: 50px auto;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 #chart, .chart-box {
-    padding-top: 20px;
+    padding-top: 0px;
     padding-left: 10px;
     background: #fff;
 }
@@ -344,23 +344,23 @@ span.apexcharts-legend-text span {
 
 .apexcharts-legend {
 
-    margin: 20px 0px;
+    margin: 0px 0px;
 }
 
 .apexcharts-svg {
 
-    overflow: visible;
+    /* overflow: visible; */
 
 }
 
 foreignObject {
 
-    overflow: visible;
+    /* overflow: visible; */
 }
 
 .apexcharts-zoomin-icon, .apexcharts-zoomout-icon {
 
-    display: none;
+   display: none;
 
 }
 

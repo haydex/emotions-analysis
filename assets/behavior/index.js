@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // General
 
-    var average = [];
+    var percent = [];
 
     class General {
 
@@ -61,32 +61,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 for (var i=0; i < legend.length; i++) {
 
-                    legend[i].innerHTML = "<span>" + options.series[i].name + "</span> " + average[i];
+                    legend[i].innerHTML = "<span>" + options.series[i].name + "</span> " + percent[i];
 
                 }
 
             }
 
-            function calculateAverages(xaxis) {
+            function percentageChange(xaxis) {
 
-                
                 if ((xaxis === undefined) || ((xaxis.min === undefined) && (xaxis.max === undefined))) {
                     
                     for (var x=0; x < options.series.length; x++) {
 
-                        average[x] = 0;
+                        var v1 = options.series[x].data[0][1];
+                        var v2 = options.series[x].data[options.series[x].data.length-1][1];
+
+                        percent[x] = ((v2 - v1)/v1) * 100;
                         
-                        for (var i=0; i < options.series[x].data.length; i++) {
-                            
-                            average[x] += options.series[x].data[i][1];
-        
-                        }
-        
-                        average[x] /= i;
-                        
-                        average[x] = average[x].toFixed(2);
+                        percent[x] = percent[x].toFixed(2) + "%";
     
                     }
+                    
 
                 } else {
                     
@@ -114,22 +109,17 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
 
                     }
+
                     
-                    for (var x=0; x< options.series.length; x++) {
+                    for (var x=0; x < options.series.length; x++) {
 
-                        average[x] = 0;
+                        var v1 = options.series[x].data[minIndex-1][1];
+                        var v2 = options.series[x].data[maxIndex][1];
+
+                        percent[x] = ((v2 - v1)/v1) * 100;
                         
-                        for (var i=minIndex, j=0; i <= maxIndex; i++, j++) {
-        
-                            average[x] += options.series[x].data[i][1];
-        
-                        }
-        
-                        average[x] /= j;
-        
-                        average[x] = average[x].toFixed(2);
-
-
+                        percent[x] = percent[x].toFixed(2) + "%";
+    
                     }
 
                 }
@@ -199,19 +189,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 ],
                 chart: {
                     type: 'area',
-                    height: 650,
+                    height: 450,
                     stacked: false,
                     events: {
                         mounted: function (chartContext, config) {
-                            calculateAverages();
+                            percentageChange();
                         },
                         scrolled: function (chartContext, axes) {
-                            calculateAverages(axes.xaxis);
+                            percentageChange(axes.xaxis);
                         },
                         zoomed: function (chartContext, axes) {
-                            calculateAverages(axes.xaxis);
+                            percentageChange(axes.xaxis);
                         }
-                    },
+                    }
                 },
                 colors: ['#70CAD1', '#8390FA', '#FAC748', '#F9E9EC', '#F88DAD', '#B0F2B4', '#BAF2E9', '#F2BAC9'],
                 dataLabels: {
@@ -221,26 +211,24 @@ document.addEventListener("DOMContentLoaded", function() {
                     curve: 'smooth'
                 },
                 fill: {
-                    type: 'gradient',
+                    type: 'solid',
                     gradient: {
                         opacityFrom: 0.6,
                         opacityTo: 0.8,
                     }
                 },
                 legend: {
-                    horizontalAlign: 'left',
-                    fontSize: '18px',
+                    fontSize: '14px',
                     show: true,
                     position: 'bottom',
                     horizontalAlign: 'center',
-                    height: 0,
-                    offsetY: 40,
+                    height: 50,
+                    /* offsetY: 40, */
                     itemMargin: {
-                        horizontal: 20,
-                        vertical: 10
+                        vertical: 0
                     },
                     formatter: function(seriesName, opts) {
-                        return ["<span>", seriesName, "</span> ", average[opts.seriesIndex]];
+                        return ["<span>", seriesName, "</span> ", percent[opts.seriesIndex]];
                     }
                 },
                 xaxis: {
@@ -250,10 +238,32 @@ document.addEventListener("DOMContentLoaded", function() {
                     show: false
                 },
                 tooltip: {
-                    onDatasetHover: {
-                        highlightDataSeries: false
-                    }
-                    
+                    y: {
+                        formatter: function(value, details) {
+                            
+                            var minIndex = 0;
+                            var maxIndex = details.dataPointIndex;
+
+                            for (var i=0; i < options.series[details.seriesIndex].data.length; i++) {
+
+                                if (options.series[details.seriesIndex].data[i][0] > details.w.config.xaxis.min) {
+
+                                    minIndex = i;
+                                    break;
+
+                                }
+
+                            }
+
+                            var v1 = options.series[details.seriesIndex].data[minIndex][1];
+                            var v2 = options.series[details.seriesIndex].data[maxIndex][1];
+
+                            var percent = ((v2 - v1)/v1) * 100;
+                            percent = percent.toFixed(2) + "%";
+                        
+                            return percent
+                        }
+                      }
                 }
                 
             };
