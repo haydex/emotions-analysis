@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 ],
                 chart: {
                     type: 'area',
-                    height: 450,
+                    height: 750,
                     stacked: false,
                     events: {
                         mounted: function (chartContext, config) {
@@ -211,14 +211,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     curve: 'smooth'
                 },
                 fill: {
-                    type: 'solid',
+                    type: 'gradient',
                     gradient: {
                         opacityFrom: 0.6,
                         opacityTo: 0.8,
                     }
                 },
                 legend: {
-                    fontSize: '14px',
+                    fontSize: '16px',
                     show: true,
                     position: 'bottom',
                     horizontalAlign: 'center',
