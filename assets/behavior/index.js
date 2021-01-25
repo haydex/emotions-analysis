@@ -191,6 +191,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     type: 'area',
                     height: 750,
                     stacked: false,
+                    animations: {
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 200,
+                        animateGradually: {
+                            enabled: false,
+                            delay: 150
+                        },
+                        dynamicAnimation: {
+                            enabled: true,
+                            speed: 200
+                        }
+                    },
                     events: {
                         mounted: function (chartContext, config) {
                             percentageChange();
