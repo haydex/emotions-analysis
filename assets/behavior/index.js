@@ -113,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     
                     for (var x=0; x < options.series.length; x++) {
 
-                        var v1 = options.series[x].data[minIndex-1][1];
-                        var v2 = options.series[x].data[maxIndex][1];
+                        var v1 = options.series[x].data[minIndex][1];
+                        var v2 = options.series[x].data[maxIndex-1][1];
 
                         percent[x] = ((v2 - v1)/v1) * 100;
                         
